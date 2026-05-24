@@ -25,28 +25,77 @@ document.addEventListener('keydown', e => {
 });
 
 /* ============================================
-   2. TABS
+   2. TABS — with sliding pill + panel slide
    ============================================ */
 document.querySelectorAll('.tabs').forEach(tabs => {
   const tabButtons = tabs.querySelectorAll('.tabs__tab');
   const panels = tabs.querySelectorAll('.tabs__panel');
+  const list = tabs.querySelector('.tabs__list');
+  const activeTab = tabs.querySelector('.tabs__tab.is-active');
+  
+  // Create sliding pill
+  const pill = document.createElement('div');
+  pill.className = 'tabs__pill';
+  pill.style.cssText = `
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: left 300ms cubic-bezier(0.4, 0, 0.2, 1), width 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
+    pointer-events: none;
+  `;
+  list.style.position = 'relative';
+  list.appendChild(pill);
+  
+  // Position pill on active tab
+  function movePillTo(tab) {
+    pill.style.left = tab.offsetLeft + 'px';
+    pill.style.width = tab.offsetWidth + 'px';
+  }
+  
+  // Initial position
+  if (activeTab) movePillTo(activeTab);
+  
+  // Update on window resize
+  window.addEventListener('resize', () => {
+    const current = tabs.querySelector('.tabs__tab.is-active');
+    if (current) movePillTo(current);
+  });
 
   tabButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      // Deactivate all
+      const targetPanel = tabs.querySelector('#' + btn.dataset.tab);
+      const currentPanel = tabs.querySelector('.tabs__panel.is-active');
+      
+      // Don't re-click active
+      if (btn.classList.contains('is-active')) return;
+      
+      // Move pill
+      movePillTo(btn);
+      
+      // Update tabs
       tabButtons.forEach(b => {
         b.classList.remove('is-active');
         b.setAttribute('aria-selected', 'false');
       });
-      panels.forEach(p => p.classList.remove('is-active'));
-
-      // Activate clicked
       btn.classList.add('is-active');
       btn.setAttribute('aria-selected', 'true');
-      tabs.querySelector('#' + btn.dataset.tab).classList.add('is-active');
+      
+      // Slide panels
+      if (currentPanel) {
+        currentPanel.classList.add('is-exiting');
+        currentPanel.classList.remove('is-active');
+        setTimeout(() => currentPanel.classList.remove('is-exiting'), 300);
+      }
+      
+      targetPanel.classList.add('is-active');
     });
   });
 });
+
 
 /* ============================================
    3. ACCORDION
