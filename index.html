@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UI Component Library — Vanilla JS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <h1>Vanilla JS Component Library</h1>
+      <p>6 custom components. Zero dependencies. Hand-built.</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- 1. MODAL -->
+    <section class="component">
+      <h2>1. Modal Dialog</h2>
+      <button class="btn btn--primary" data-modal-open="demo-modal">Open Modal</button>
+      <div class="modal" id="demo-modal" aria-hidden="true">
+        <div class="modal__overlay" data-modal-close></div>
+        <div class="modal__content">
+          <h3>Hello from the modal!</h3>
+          <p>This is a fully accessible modal with keyboard support (Escape to close) and a focus trap.</p>
+          <button class="btn btn--ghost" data-modal-close>Close</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. TABS -->
+    <section class="component">
+      <h2>2. Tab Panel</h2>
+      <div class="tabs">
+        <div class="tabs__list" role="tablist">
+          <button class="tabs__tab is-active" role="tab" aria-selected="true" data-tab="tab-1">Design</button>
+          <button class="tabs__tab" role="tab" aria-selected="false" data-tab="tab-2">Development</button>
+          <button class="tabs__tab" role="tab" aria-selected="false" data-tab="tab-3">Marketing</button>
+        </div>
+        <div class="tabs__panel is-active" id="tab-1">
+          <p>Design is where it all starts. Wireframes, prototypes, and pixel-perfect visuals.</p>
+        </div>
+        <div class="tabs__panel" id="tab-2">
+          <p>Clean, semantic code that performs. HTML, CSS, and JavaScript working in harmony.</p>
+        </div>
+        <div class="tabs__panel" id="tab-3">
+          <p>Launch, measure, iterate. Data-driven decisions to grow your product.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. ACCORDION -->
+    <section class="component">
+      <h2>3. Animated Accordion</h2>
+      <div class="accordion">
+        <div class="accordion__item">
+          <button class="accordion__trigger" aria-expanded="false">
+            What is included in the free plan?
+            <span class="accordion__icon">+</span>
+          </button>
+          <div class="accordion__body">
+            <p>Up to 1,000 users, basic analytics, and community support. No credit card required.</p>
+          </div>
+        </div>
+        <div class="accordion__item">
+          <button class="accordion__trigger" aria-expanded="false">
+            Can I upgrade or downgrade anytime?
+            <span class="accordion__icon">+</span>
+          </button>
+          <div class="accordion__body">
+            <p>Yes. Change your plan at any time. Prorated billing means you only pay for what you use.</p>
+          </div>
+        </div>
+        <div class="accordion__item">
+          <button class="accordion__trigger" aria-expanded="false">
+            Do you offer refunds?
+            <span class="accordion__icon">+</span>
+          </button>
+          <div class="accordion__body">
+            <p>We offer a 14-day money-back guarantee on all paid plans. No questions asked.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. CAROUSEL -->
+    <section class="component">
+      <h2>4. Image Carousel</h2>
+      <div class="carousel">
+        <div class="carousel__track">
+          <div class="carousel__slide is-active" style="background:#6366f1">Slide 1</div>
+          <div class="carousel__slide" style="background:#10b981">Slide 2</div>
+          <div class="carousel__slide" style="background:#f59e0b">Slide 3</div>
+          <div class="carousel__slide" style="background:#ef4444">Slide 4</div>
+        </div>
+        <button class="carousel__btn carousel__btn--prev" aria-label="Previous slide">←</button>
+        <button class="carousel__btn carousel__btn--next" aria-label="Next slide">→</button>
+        <div class="carousel__dots"></div>
+      </div>
+    </section>
+
+    <!-- 5. TOAST NOTIFICATIONS -->
+    <section class="component">
+      <h2>5. Toast Notifications</h2>
+      <div class="toast-buttons">
+        <button class="btn btn--success" data-toast="success">Success Toast</button>
+        <button class="btn btn--error" data-toast="error">Error Toast</button>
+        <button class="btn btn--info" data-toast="info">Info Toast</button>
+      </div>
+      <div class="toast-container"></div>
+    </section>
+
+    <!-- 6. DROPDOWN -->
+    <section class="component">
+      <h2>6. Animated Dropdown</h2>
+      <div class="dropdown">
+        <button class="dropdown__toggle" aria-expanded="false" aria-haspopup="true">
+          Choose an option ▼
+        </button>
+        <ul class="dropdown__menu" role="menu">
+          <li role="menuitem">Profile</li>
+          <li role="menuitem">Settings</li>
+          <li role="menuitem">Billing</li>
+          <li role="menuitem">Sign out</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Built with vanilla HTML, CSS, and JavaScript. No frameworks. No libraries.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
